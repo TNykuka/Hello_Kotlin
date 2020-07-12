@@ -14,14 +14,12 @@ fun main(args: Array<String>){
         println("A fish is swimming")
     }
 }
+fun getDirtySensorReading() = 20
 
-fun shouldChangeWater(
-    day: String,
-    temperature: Int = 22,
-    dirty: Int = 20) : boolean {
-    val isTooHot = temperature > 30
-    val isDirty = dirty > 30
-    val isSunday = day == "Sundey"
+fun shouldChangeWater(day: String, temperature: Int = 22, dirty: Int = 20) : Boolean {
+    fun isTooHot(temperature: Int) = temperature > 30
+    fun isDirty(dirty: Int) = dirty > 30
+    fun isSunday(day: String) = day == "Sundey"
     return when{
         isTooHot(temperature)-> true
         isDirty(dirty) -> true
