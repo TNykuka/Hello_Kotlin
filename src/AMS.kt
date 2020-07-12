@@ -1,3 +1,4 @@
+import jdk.dynalink.Operation
 import java.util.*
 
 fun main(args: Array<String>){
@@ -16,6 +17,7 @@ fun main(args: Array<String>){
     }
 }
 
+
 fun shouldChangeWater(
     day: String,
     temperature: Int = 22,
@@ -31,6 +33,23 @@ fun shouldChangeWater(
 
     }
 }
+
+var dirty = 20
+var waterFilter: (Int) -> Int = {dirty: Int -> dirty / 2 }
+fun feedFish(dirty: Int) = dirty + 10
+
+fun updateDirty(dirty: Int, operation: (Int) -> Int): Int{
+    return operation(dirty)
+}
+
+fun dirtyProcessor(){
+    dirty = updateDirty(dirty, waterFilter)
+    dirty = updateDirty(dirty, ::feedFish)
+    dirty = updateDirty(dirty,{ dirty ->
+        dirty +50
+    })
+}
+
 
 fun isTooHot(temperature: Int) = temperature >30
 fun isDirty(dirty: Int) = dirty > 30
@@ -64,6 +83,8 @@ fun feedTheFish() {
     if (shouldChangeWater(day)){
         println("Change the water today")
     }
+    // call dirty processor
+    dirtyProcessor()
 }
 
 
