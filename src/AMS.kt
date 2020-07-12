@@ -46,7 +46,7 @@ fun dirtyProcessor(){
     dirty = updateDirty(dirty, waterFilter)
     dirty = updateDirty(dirty, ::feedFish)
     dirty = updateDirty(dirty,{ dirty ->
-        dirty +50
+
     })
 }
 
@@ -103,3 +103,8 @@ fun fishFood (day : String) : String{
         else -> "fasting"
     }
 }
+fun canAddFish(tankSize: Double, currentFish: List<Int>, fishSize: Int = 2, hasDecorations: Boolean = true): Boolean {
+    return (tankSize * if (hasDecorations) 0.8 else 1.0) >= (currentFish.sum() + fishSize)
+}
+
+
