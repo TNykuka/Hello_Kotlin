@@ -10,4 +10,4 @@ fun main(args: Array<String>){
 
     val message = "You are ${ if (temperature > 50 ) "fried" else "safe" } fish"
     println(message)
-}123
+}
