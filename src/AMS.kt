@@ -1,3 +1,7 @@
-fun main(args: Array<String>){
-    println("Hello, TNyKk")
+fun main(args: Array<String>) {
+    dayOfWeek()
+}
+
+fun dayOfWeek() {
+    println("What day is it today?")
 }
