@@ -46,7 +46,7 @@ fun dirtyProcessor(){
     dirty = updateDirty(dirty, waterFilter)
     dirty = updateDirty(dirty, ::feedFish)
     dirty = updateDirty(dirty,{ dirty ->
-
+        dirty+ 50
     })
 }
 
