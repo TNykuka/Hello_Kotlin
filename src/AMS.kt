@@ -1,66 +1,19 @@
-import java.util.*
-
-fun main(args: Array<String>){
-    println("Hello, ${args[0]}!")
-    feedTheFish()
-
-    var bubbles = 0
-    while (bubbles < 50){
-        bubbles++
-    }
-
-    //repeat (function from standard library)
-    repeat(2){
-        println("A fish is swimming")
+fun main(args: Array<String>) {
+    var fortune: String = ""
+    while (!fortune.contains("Take it easy")) {
+        fortune = getFortune(getBirthday())
+        println("\nYour fortune is: $fortune")
     }
 }
-fun getDirtySensorReading() = 20
-
-fun shouldChangeWater(day: String, temperature: Int = 22, dirty: Int = 20) : Boolean {
-    fun isTooHot(temperature: Int) = temperature > 30
-    fun isDirty(dirty: Int) = dirty > 30
-    fun isSunday(day: String) = day == "Sundey"
-    return when{
-        isTooHot(temperature)-> true
-        isDirty(dirty) -> true
-        isSunday(day) -> true
-        else -> false
-
-    }
-}
-
-fun isTooHot(temperature: Int) = temperature >30
-fun isDirty(dirty: Int) = dirty > 30
-fun  isSunday(day: String) = day == "Sunday"
-
-
-
-fun feedTheFish() {
-    val day = randomDay()
-    val food = "Pellets"
-    println("Today is $day and the fish eat $food")
-    shouldChangeWater(day,20,50)
-    shouldChangeWater(day)
-    shouldChangeWater(day, dirty = 50)
-
-    if (shouldChangeWater(day)){
-        println("Change the water today")
-    }
-}
-
-
-fun  randomDay() : String{
-    val week = listOf ("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
-    return week[Random().nextInt(7)]
-}
-fun fishFood (day : String) : String{
-    var food = "fasting"
-    return when (day){
-        "Monday" -> "flakes"
-        "Wednesday" -> "redworms"
-        "Thursday" -> "granules"
-        "Friday" -> "mosquitoes"
-        "Sunday" -> "plankton"
-        else -> "fasting"
+fun isVeryHot (temperature: Int) = temperature > 35
+fun isSadRainyCold (mood: String, weather: String, temperature: Int) =
+    mood == "sad" && weather == "rainy" && temperature == 0
+fun isHappySunny (mood: String, weather: String) = mood == "happy" && weather == "sunny"
+fun whatShouldIDoToday(mood: String, weather: String = "sunny", temperature: Int = 24) : String {
+    return when {
+        isVeryHot(temperature) -> "go swimming"
+        isSadRainyCold(mood, weather, temperature) -> "stay in bed"
+        isHappySunny(mood, weather) -> "go for a walk"
+        else -> "Stay home and read."
     }
 }
