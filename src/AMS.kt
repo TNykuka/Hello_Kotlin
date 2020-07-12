@@ -3,23 +3,32 @@ import java.util.*
 fun main(args: Array<String>){
     println("Hello, ${args[0]}!")
     feedTheFish()
-}
-fun getDirtySensorReading() = 20
 
-fun shouldChangeWater(day: String, temperature: Int = 22, dirty: Int = getDirtySensorReading()) : boolean {
-    fun isTooHot(temperature: Int) = temperature > 30
-    fun isDirty(day: String) = dirty > 30
-    fun isSunday(day: String) = day == "Sundey"
+    var bubbles = 0
+    while (bubbles < 50){
+        bubbles++
+    }
+
+    //repeat (function from standard library)
+    repeat(2){
+        println("A fish is swimming")
+    }
+}
+
+fun shouldChangeWater(
+    day: String,
+    temperature: Int = 22,
+    dirty: Int = 20) : boolean {
+    val isTooHot = temperature > 30
+    val isDirty = dirty > 30
+    val isSunday = day == "Sundey"
     return when{
         isTooHot(temperature)-> true
         isDirty(dirty) -> true
         isSunday(day) -> true
         else -> false
-    }
-}
-fun makeNewAquarium() = println("Building a new aquarium......")
-fun aquariumStatusReport(aquarium: Any = makeNewAquarium()){
 
+    }
 }
 
 fun isTooHot(temperature: Int) = temperature >30
