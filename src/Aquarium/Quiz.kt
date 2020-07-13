@@ -1,31 +1,23 @@
-fun main (args: Array<String>) {
-    delegate()
-}
+class Book(val title: String, val author: String, val year: Int) {
 
-fun delegate() {
-    val pleco = Plecostomus()
-    println("Fish has has color ${pleco.color}")
-    pleco.eat()
-}
+    fun getTitleAuthor(): Pair<String, String> {
+        return (title to author)
+    }
 
-interface FishAction {
-    fun eat()
-}
-
-interface FishColor {
-    val color: String
-}
-
-object GoldColor : FishColor {
-    override val color = "gold"
-}
-
-class PrintingFishAction(val food: String) : FishAction {
-    override fun eat() {
-        println(food)
+    fun getTitleAuthorYear(): Triple<String, String, Int> {
+        return Triple(title, author, year)
     }
 }
 
-class Plecostomus (fishColor: FishColor = GoldColor):
-    FishAction by PrintingFishAction("eat a lot of algae"),
-    FishColor by fishColor
+fun main(args: Array<String>) {
+
+    val book = Book("Romeon and Juliet", "William Shakespeare", 1597)
+    val bookTitleAuthor = book.getTitleAuthor()
+    val bookTitleAuthorYear = book.getTitleAuthorYear()
+
+    println("Here is your book ${bookTitleAuthor.first} by ${bookTitleAuthor.second}")
+
+    println("Here is your book ${bookTitleAuthorYear.first} " +
+            "by ${bookTitleAuthorYear.second} written in ${bookTitleAuthorYear.third}")
+
+}
