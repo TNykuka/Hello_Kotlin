@@ -1,16 +1,17 @@
-const val MAX_NUMBER_BOOKS = 20
+fun Book.weight() : Double { return (pages * 1.5) }
 
-fun canBorrow(hasBooks: Int): Boolean {
-    return (hasBooks < MAX_NUMBER_BOOKS)
-}
+fun Book.tornPages(torn: Int) = if (pages >= torn) pages -= torn else pages = 0
 
-object Constants {
-    const val BASE_URL = "http://www.turtlecare.net/"
+class Puppy() {
+    fun playWithBook(book: Book) {
+        book.tornPages(Random().nextInt(12))
+    }
 }
+val puppy = Puppy()
+val book = Book("Oliver Twist", "Charles Dickens", 1837, 540)
 
-fun printUrl() {
-    println(Constants.BASE_URL + title + ".html")
+while (book.pages > 0) {
+    puppy.playWithBook(book)
+    println("${book.pages} left in ${book.title}")
 }
-companion object {
-    val BASE_URL = "http://www.turtlecare.net/"
-}
+println("Sad puppy, no more pages in ${book.title}. ")
