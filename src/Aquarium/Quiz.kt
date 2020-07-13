@@ -1,17 +1,31 @@
-open class Book(val title: String, val author: String) {
+fun main (args: Array<String>) {
+    delegate()
+}
 
-    private var currentPage = 1
+fun delegate() {
+    val pleco = Plecostomus()
+    println("Fish has has color ${pleco.color}")
+    pleco.eat()
+}
 
-    open fun readPage() {
-        currentPage++
+interface FishAction {
+    fun eat()
+}
+
+interface FishColor {
+    val color: String
+}
+
+object GoldColor : FishColor {
+    override val color = "gold"
+}
+
+class PrintingFishAction(val food: String) : FishAction {
+    override fun eat() {
+        println(food)
     }
 }
 
-class eBook(title: String, author: String, var format: String = "text") : Book(title, author) {
-
-    private var wordsRead = 0
-
-    override fun readPage() {
-        wordsRead = wordsRead + 250
-    }
-}
+class Plecostomus (fishColor: FishColor = GoldColor):
+    FishAction by PrintingFishAction("eat a lot of algae"),
+    FishColor by fishColor
