@@ -41,3 +41,9 @@ fun genericExample(){
     aquarium.hasWaterSupplyOfType<TapWater>() // true
     aquarium.waterSupply.isOfType<LakeWater>() // false
 }
+
+fun <T : BaseBuildingMaterial> isSmallBuilding(building: Building<T>) {
+    if (building.actualMaterialsNeeded < 500) println("Small building")
+    else println("large building")
+}
+isSmallBuilding(Building(Brick()))
