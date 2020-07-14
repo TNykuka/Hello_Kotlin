@@ -45,3 +45,5 @@ fun genericExample(){
     val aquarium:Aquarium<TapWater> = Aquarium((TapWater))
     aquarium.addWater(Cleaner)
 }
+
+class Building<out T: BaseBuildingMaterial>(val buildingMaterial: T)
