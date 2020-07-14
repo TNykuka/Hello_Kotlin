@@ -1,17 +1,14 @@
-fun main(args: Array<String>) {
-    val numbers = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
-    print(numbers.divisibleBy {
-        it.rem(3)
-    })
+fun move(where: () -> Boolean ) {
+    where.invoke()
 }
-
-
-fun List<Int>.divisibleBy(block: (Int) -> Int): List<Int> {
-    val result = mutableListOf<Int>()
-    for (item in this) {
-        if (block(item) == 0) {
-            result.add(item)
-        }
-    }
-    return result
+fun makeMove(command:String?) {
+    if (command.equals("n")) move(north)
+    else if (command.equals("s")) move(south)
+    else if (command.equals("e")) move(east)
+    else if (command.equals("w")) move(west)
+    else move(end)
+}
+while (true) {
+    print("Enter a direction: n/s/e/w: ")
+    game.makeMove(readLine())
 }
