@@ -1,23 +1,17 @@
-enum class Direction {
-    NORTH, EAST, WEST, SOUTH, START, END
-}
-
-class Game {
-    var path = mutableListOf<Direction>(Direction.START)
-    val north = { path.add(Direction.NORTH) }
-    val south = { path.add(Direction.SOUTH) }
-    val east = { path.add(Direction.EAST) }
-    val west = { path.add(Direction.WEST) }
-    val end = { path.add(Direction.END); println("Game Over: $path"); path.clear(); false }
-}
-
 fun main(args: Array<String>) {
-    val game = Game()
-    println(game.path)
-    game.north()
-    game.south()
-    game.east()
-    game.west()
-    game.end()
-    println(game.path)
+    val numbers = listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
+    print(numbers.divisibleBy {
+        it.rem(3)
+    })
+}
+
+
+fun List<Int>.divisibleBy(block: (Int) -> Int): List<Int> {
+    val result = mutableListOf<Int>()
+    for (item in this) {
+        if (block(item) == 0) {
+            result.add(item)
+        }
+    }
+    return result
 }
