@@ -1,8 +1,44 @@
 package Aquarium
 
-import java.lang.Math.PI
+import kotlin.reflect.KClass
+import kotlin.reflect.full.findAnnotation
 
-fun main(args: Array<String>){
+@ImAplant class plant{
+    fun trim(){}
+    fun fertilize(){}
+
+    @get:OnGet
+    val IsGrowing: Boolean = true
+
+    @set:OnSet
+    var needsFood: Boolean = false
+}
+
+annotation class ImAplant
+
+@Target(AnnotationTarget.PROPERTY_GETTER)
+annotation class OnGet
+
+@Target(AnnotationTarget.PROPERTY_GETTER)
+annotation class OnSet
+
+fun reflections(){
+    val classObj : KClass<Plant> = Plant::class
+
+    //print all annotations
+    for (annotations:Annotation in ClassObj.annotations){
+        println(annotations.annotationClass.simpleName)
+    }
+
+    // find one annotations, or null
+    val annotated:ImAplant? = classObj.findAnnotation<ImAplant>()
+
+    annotated?.apply{this:ImAPlant
+        println("Found a plant annotation!")
+    }
+}
+
+/*fun main(args: Array<String>){
     val myAquarium: Aquarium = buildAquarium()
     println("volume: ${myAquarium.volume}")
 }
@@ -13,7 +49,7 @@ class Aquarium(val width: Int = 0,var height: Int = 40,val length: Int = 100){
     var volume
         get() = width * height * length / 1_000
         set(value) {height = (value * 1000) / (width * length)}
-}
+}*/
 
 
 
