@@ -1,30 +1,25 @@
 package Aquarium5
 
-import Aquarium.fishExample
-
-data class Fish (var name:String)
+import java.util.*
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 fun main (args: Array<String>){
     fishExample()
 }
 
-fun fishExample(){
+data class Fish (var name:String)
+
+fun fishExample() {
     val fish = Fish("Splashy")
 
-    myWith (fish.name){
-        println(capitalize())
-    }
-
-    println(fish.run {name})
-    println(fish.apply {  })
-
-    val fish2 : Fish = Fish(name = "splashy").apply {name = "Sharky"  }
-    println(fish2.name)
-
-    fish.let { it.name.capitalize() }
-        .let { it + "fish" }
+    //with inline no object is created every call to myWith
+    myWith(fish.name, Object : Function1< String , Unit>){
+        override fun invoke(name: String){
+            name.capitalize()
+        }
+    })
+    fish.name.capitalize()
 }
-
-fun  myWith(name: String,block:String.() -> Unit){
+inline fun myWith(name: String,block: String.() -> Unit){
     name.block()
 }
